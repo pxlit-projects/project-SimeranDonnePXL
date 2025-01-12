@@ -1,0 +1,7 @@
+<app-filter (filterChanged)="handleFilter($event)"></app-filter>
+
+<div class="text-center mt-10 w-full h-full">
+    <ng-container *ngFor="let post of (filteredData$ | async);">
+        <app-post-item [post]="post"></app-post-item>
+    </ng-container>
+</div>

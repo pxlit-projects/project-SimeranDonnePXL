@@ -1,0 +1,37 @@
+<div class="mx-auto mt-[50px] w-[50vw] rounded-lg p-20 bg-gray-100">
+    <form  [formGroup]="postForm" (ngSubmit)="onSubmit($event)">
+        <div class="mb-4">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+            <input 
+                type="text" 
+                id="title" 
+                formControlName="title" 
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> 
+            @if (postForm.get('title')?.touched && postForm.get('title')?.hasError('required')){
+                <div class="text-red-500 text-sm mt-1">Title is required</div>
+            } 
+        </div>
+        <div class="mb-4">
+            <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
+            <textarea 
+                id="content" 
+                formControlName="content" 
+                class="shadow appearance-none border resize-none h-[30vh] rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+            @if (postForm.get('content')?.touched && postForm.get('content')?.hasError('required')){
+                <div class="text-red-500 text-sm mt-1">Content is required</div>
+            } 
+        </div>
+        <div class="flex justify-between">
+            <button type="submit" class="bg-[#48cae4] hover:bg-[#2c606b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" [disabled]="!postForm.valid"
+            name="action" 
+            value="create">
+                Create Post
+            </button>
+            <button type="submit" class="bg-[#48cae4] hover:bg-[#2c606b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" [disabled]="!postForm.valid"
+            name="action" 
+            value="concept">
+                Save As Concept
+            </button>
+        </div>
+    </form>
+</div>

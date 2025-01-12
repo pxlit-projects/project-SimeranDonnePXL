@@ -1,0 +1,5 @@
+<div class="text-center mt-10 w-full h-full">
+    <ng-container *ngFor="let concept of (filteredData$ | async);">
+        <app-concept-item [concept]="concept"></app-concept-item>
+    </ng-container>
+</div>

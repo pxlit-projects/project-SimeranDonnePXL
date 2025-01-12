@@ -1,0 +1,50 @@
+server:
+  port: 8083
+
+spring:
+  cloud:
+    gateway:
+      #      default-filters:
+      #      - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        corsConfigurations:
+          '[/**]': # Match all routes
+            allowedOrigins:
+              - "http://localhost:4200" # Your specific allowed origin
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "DELETE" # Your specific allowed methods
+            allowedHeaders:
+              - "*" # Allow all headers
+            allowCredentials: true # Allow credentials
+
+      routes:
+        - id: post-service
+          uri: lb://post-service
+          predicates:
+            - Path=/post/**
+          filters:
+            - RewritePath=/post/(?<path>.*), /$\{path}
+        - id: review-service
+          uri: lb://review-service
+          predicates:
+            - Path=/review/**
+          filters:
+            - RewritePath=/review/(?<path>.*), /$\{path}
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notification/**
+          filters:
+            - RewritePath=/notification/(?<path>.*), /$\{path}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+

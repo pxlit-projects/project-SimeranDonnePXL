@@ -1,0 +1,5 @@
+<div class="text-center mt-10 w-full h-full">
+    <ng-container *ngFor="let post of (filteredData$ | async);">
+        <app-review-list-item [post]="post"></app-review-list-item>
+    </ng-container>
+</div>

@@ -1,0 +1,5 @@
+<div class="text-center mt-10 w-full h-full">
+    <ng-container *ngFor="let pendingPost of (filteredData$ | async);">
+        <app-pending-post-item [post]="pendingPost"></app-pending-post-item>
+    </ng-container>
+</div>
